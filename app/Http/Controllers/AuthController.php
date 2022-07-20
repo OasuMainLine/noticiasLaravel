@@ -28,8 +28,7 @@ class AuthController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8',
-                'user_status' => 'string|max:10',
-
+                'user_status' => 'string|max:10'
             ]
         );
 
@@ -48,7 +47,6 @@ class AuthController extends Controller
         
         $categories = json_decode($request->categories);
 
-        
         $user->categories()->attach($categories);
         
         return response()->json([

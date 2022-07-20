@@ -27,10 +27,10 @@ class NewsController extends Controller
         return $news;
     }
 
-    public function related($id, $category)
+    public function related($id, $categories)
     {
         $related_news = News::where([
-            ["categories_id", "=", $category],
+            ["categories_id", "=", $categories],
             ["id", "<>", $id]
         ])
         ->get();
