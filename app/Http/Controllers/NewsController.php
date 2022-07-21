@@ -21,7 +21,7 @@ class NewsController extends Controller
         // todo esto es para poder colocar las categorias dentro de las cartas de noticias 
         $news = DB::table("news")
         ->join("categories", "news.categories_id","=", "categories.id")
-        ->select("news.id", "news.title", "news.subtitle", "news.description", "news.image", "news.created_at", "categories.categories as category")
+        ->select("news.id", "news.title", "news.subtitle", "news.description", "news.image", "news.created_at", "categories.categories as category", "categories.id as category_id")
         ->get();
 
         return $news;
@@ -37,7 +37,7 @@ class NewsController extends Controller
         if(count($related_news) > 0){
             return $related_news;
         }else{
-            return response()->json(["message"=>"No hay noticias relacionadas"]);
+            return response()->json(["message"=>"No hay noticias relacionadas"], 404);
         };
     }
 
@@ -59,7 +59,7 @@ class NewsController extends Controller
     {
         $item = DB::table("news")
         ->join("categories", "news.categories_id","=", "categories.id")
-        ->select("news.id", "news.title", "news.subtitle", "news.description", "news.image", "news.created_at", "categories.categories as category")
+        ->select("news.id", "news.title", "news.subtitle", "news.description", "news.image", "news.created_at", "categories.categories as category", "categories.id as category_id")
         ->where('news.id', '=', $id)
         ->get();
 
